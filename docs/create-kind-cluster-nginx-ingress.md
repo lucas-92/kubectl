@@ -1,5 +1,4 @@
-Create a cluster with kind and nginx-ingress support:
-
+## Create a cluster with kind and nginx-ingress support:
 ```
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -52,4 +51,9 @@ extraPortMappings:
 Install the nginx-ingress:
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+```
+
+## Delete the cluster:
+```
+kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
 ```
