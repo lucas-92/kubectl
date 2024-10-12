@@ -111,5 +111,6 @@ kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
 ```
 - AWS:
 ```
+eksctl delete cluster --name=eks-cluster -r us-east-1
 ```
 
