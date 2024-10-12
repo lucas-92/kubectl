@@ -28,8 +28,8 @@ kubectl apply -f https://raw.githubusercontent.com/nginxinc/nginx-gateway-fabric
 kubectl get pods -n nginx-gateway
 ```
 
-## 3 - Create and applying the yaml files:
-3.1 - Create the file gateway.yaml:
+## 3 - Create the Gateway and Service files:
+3.1 - Create the file gateway.yaml and apply:
 ```
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: Gateway
@@ -42,12 +42,11 @@ spec:
       protocol: HTTP
       port: 80
 ```
-3.2 - Apply gateway.yaml:
 ```
 kubectl apply -f gateway.yaml
 ``` 
 
-3.3 - Create the file gateway-service.yaml
+3.2 - Create the file gateway-service.yaml, check the port number and apply:
 ```
 apiVersion: v1
 kind: Service
@@ -75,8 +74,91 @@ spec:
         targetPort: 443
         nodPort: 31438
 ```
-
-3.4 - Apply gateway-service.yaml:
+```
+kubectl get svc -n nginx-gateway
+```
 ```
 kubectl apply -f gateway-service.yaml
-``` 
+kubectl get svc -n nginx-gateway
+```
+
+3.5 - Access the 404 Nginx page:
+```
+curl localhost:8080
+```
+
+Congrats, Nginx is working!
+
+## 4 - Creating the Deployment of Apps files:
+4.1 - Create the app1.yaml and apply:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+spec:
+  replicas: 2
+  selector
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+        - name: app1
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello from APP1"
+          ports:
+            - containerPort: 5678
+```
+```
+kubectl apply -f app1.yaml
+```
+4.2 - Create the app2.yaml and apply:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+spec:
+  replicas: 2
+  selector
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      containers:
+        - name: app1
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello from APP2"
+          ports:
+            - containerPort: 5678
+```
+```
+kubectl apply -f app2.yaml
+```
+## 5 - Creating the Service of Apps files:
+5.1 - Create the app1-service.yaml and apply:
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+spec:
+  selector:
+    app: app1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5678
+```
+```
+kubectl apply -f app1-service.yaml
+```
