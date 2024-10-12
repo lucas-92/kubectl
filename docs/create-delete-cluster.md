@@ -55,7 +55,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 
 ## Create a cluster with eksctl
 ```
-``
+(SOON)
+```
 
 ## Delete the cluster:
 ```
