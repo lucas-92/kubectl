@@ -4,6 +4,7 @@ Create a cluster with kind and nginx-ingress support:
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+name: cluster-kind-nginx-ingress
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
