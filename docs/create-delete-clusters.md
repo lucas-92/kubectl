@@ -1,6 +1,6 @@
 ## Create a k8s Cluster:
-### 1. Kind:
-#### 1.1 nginx-ingress
+### 1 - Kind:
+#### 1.1 - nginx-ingress
 ```
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -59,7 +59,7 @@ kubectl get pods -n ingress-nginx
 kubectl get ingress -n ingress-nginx
 ```
 
-#### 1.2 Control Plane Node Only Cluster
+#### 1.2 - Control Plane Node Only Cluster
 ```
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -77,7 +77,7 @@ nodes:
 EOF
 ```
 
-### 2. AWS:
+### 2 - AWS:
 Install eksctl:
 ```
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
