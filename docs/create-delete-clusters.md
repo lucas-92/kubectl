@@ -108,6 +108,11 @@ kubectl get nodes
 ```
 kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
 ```
+ou (Para saber o ID-DO-CONTAINER: `docker container ls -a`)
+```
+docker container stop ID-DO-CONTAINER
+docker contaier rm ID-DO-CONTAINER
+```
 - AWS:
 ```
 eksctl delete cluster --name=eks-cluster -r us-east-1
