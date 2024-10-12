@@ -1,6 +1,6 @@
 ## Create a k8s Cluster:
-### Kind:
-#### nginx-ingress
+### 1. Kind:
+#### 1.1 nginx-ingress
 ```
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -59,7 +59,25 @@ kubectl get pods -n ingress-nginx
 kubectl get ingress -n ingress-nginx
 ```
 
-### AWS:
+#### 1.2 Control Plane Node Only Cluster
+```
+cat <<EOF | kind create cluster --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: cluster-kind-control-plane-node-only
+nodes:
+  - role: control-plane
+    extraPortMappings:
+    - containerPort: 31437
+      hostPort: 8080
+      protocol: TCP
+    - containerPort: 31438
+      hostPort: 8443
+      protocol: TCP
+EOF
+```
+
+### 2. AWS:
 Install eksctl:
 ```
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
@@ -109,7 +127,7 @@ kubectl get nodes
 ```
 
 ## Delete the cluster:
-- Kind:
+### Kind:
 ```
 kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
 ```
@@ -118,7 +136,7 @@ ou (Para saber o ID-DO-CONTAINER: `docker container ls -a`)
 docker container stop ID-DO-CONTAINER
 docker contaier rm ID-DO-CONTAINER
 ```
-- AWS:
+### AWS:
 ```
 eksctl delete cluster --name=eks-cluster -r us-east-1
 ```
