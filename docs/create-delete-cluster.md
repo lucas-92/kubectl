@@ -53,6 +53,10 @@ Install the nginx-ingress:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
 
+## Create a cluster with eksctl
+```
+``
+
 ## Delete the cluster:
 ```
 kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
