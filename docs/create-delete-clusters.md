@@ -1,4 +1,6 @@
-## Create a cluster with kind and nginx-ingress support:
+## Create a k8s Cluster:
+### Kind:
+#### nginx-ingress
 ```
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -23,7 +25,6 @@ nodes:
 - role: worker
 EOF
 ```
-
 Mapeamento de portas:
 É importante expor serviços Ingress diretamente no host, permitindo que você acesse os serviços através das portas padrão de HTTP e HTTPS sem precisar configurar portas alternativas. Para isso, mapeia as portas do host (sua máquina local) para as portas no container onde o nó control-plane está rodando. Essas portas são:
 - 80: Porta HTTP.
@@ -53,7 +54,7 @@ Install the nginx-ingress:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
 
-## Create a cluster with eksctl
+### AWS:
 ```
 Install eksctl:
 ```
@@ -108,5 +109,7 @@ kubectl get nodes
 ```
 kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
 ```
-- eksctl:
+- AWS:
+```
+```
 
