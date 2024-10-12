@@ -55,7 +55,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 ```
 
 ### AWS:
-```
 Install eksctl:
 ```
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
@@ -102,7 +101,7 @@ aws eks --region us-east-1 update-kubeconfig --name eks-cluster
 Testing:
 ```
 kubectl get nodes
-``
+```
 
 ## Delete the cluster:
 - Kind:
@@ -113,4 +112,3 @@ kind delete cluster --name cluster-kind-nginx-ingress-omega-strain
 ```
 eksctl delete cluster --name=eks-cluster -r us-east-1
 ```
-
