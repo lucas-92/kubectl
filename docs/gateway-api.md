@@ -162,3 +162,59 @@ spec:
 ```
 kubectl apply -f app1-service.yaml
 ```
+5.2 - Create the app2-service.yaml and apply:
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2-service
+spec:
+  selector:
+    app: app2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5678
+```
+```
+kubectl apply -f app2-service.yaml
+```
+## 6 - Create the HTTP Route files:
+6.1 - Create app-http_route.yaml and apply:
+```
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: app1-app2-route
+spec:
+  parentRefs:
+    - name: my-gateway
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/app1"
+      backendRefs:
+        - name: app1-service
+          port: 80
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/app2"
+      backendRefs:
+        - name: app2-service
+          port: 80
+```
+```
+kubectl apply -f app-http_route.yaml 
+```
+
+6.1 - Checking app1:
+```
+curl localhost:8080/app1
+```
+
+6.2 - Checking app1:
+```
+curl localhost:8080/app2
+```
