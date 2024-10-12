@@ -26,9 +26,7 @@ nodes:
 EOF
 ```
 Mapeamento de portas:
-É importante expor serviços Ingress diretamente no host, permitindo que você acesse os serviços através das portas padrão de HTTP e HTTPS sem precisar configurar portas alternativas. Para isso, mapeia as portas do host (sua máquina local) para as portas no container onde o nó control-plane está rodando. Essas portas são:
-- 80: Porta HTTP.
-- 443: Porta HTTPS.
+É importante expor serviços Ingress diretamente no host, permitindo que você acesse os serviços através das portas padrão de HTTP e HTTPS sem precisar configurar portas alternativas. Para isso, mapeia as portas do host (sua máquina local) para as portas no container onde o nó control-plane está rodando. Essas portas são: 80: Porta HTTP e 443: Porta HTTPS.
 ```
 extraPortMappings:
   - containerPort: 80
@@ -48,6 +46,7 @@ extraPortMappings:
     hostPort: 8443      # Alterando a porta HTTPS do host para 8443
     protocol: TCP
 ```
+
 
 Install the nginx-ingress:
 ```
