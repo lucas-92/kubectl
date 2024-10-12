@@ -5,7 +5,7 @@
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
-name: cluster-kind-nginx-ingress-omega-strain
+name: cluster-kind-nginx-ingress
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
@@ -16,10 +16,10 @@ nodes:
         node-labels: "ingress-ready=true"
   extraPortMappings:
     - containerPort: 80   # Porta HTTP dentro do container
-      hostPort: 8080      # Alterando a porta HTTP do host para 8080
+      hostPort: 80      # Alterando a porta HTTP do host para 8080
       protocol: TCP
     - containerPort: 443  # Porta HTTPS dentro do container
-      hostPort: 8443      # Alterando a porta HTTPS do host para 8443
+      hostPort: 443      # Alterando a porta HTTPS do host para 8443
       protocol: TCP
 - role: worker
 - role: worker
