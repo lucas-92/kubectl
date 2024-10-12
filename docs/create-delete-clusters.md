@@ -54,6 +54,12 @@ Install the nginx-ingress:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
 
+Check the Pods of created nginx-ingress:
+```
+kubectl get pods -n ingress-nginx
+kubectl get ingress -n ingress-nginx
+```
+
 ### AWS:
 Install eksctl:
 ```
